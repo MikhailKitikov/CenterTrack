@@ -14,12 +14,7 @@ import torch.nn.functional as F
 import torch.utils.model_zoo as model_zoo
 
 from .base_model import BaseModel
-
-try:
-    from .DCNv2.dcn_v2 import DCN
-except:
-    print('import DCN failed')
-    DCN = None
+from DCN.dcn_v2 import DCN
 
 
 BN_MOMENTUM = 0.1
