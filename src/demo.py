@@ -13,6 +13,9 @@ import numpy as np
 from opts import opts
 from detector import Detector
 
+import sys
+sys.path.append("./lib/model/networks/DCNv2")
+
 
 image_ext = ['jpg', 'jpeg', 'png', 'webp']
 video_ext = ['mp4', 'mov', 'avi', 'mkv']
