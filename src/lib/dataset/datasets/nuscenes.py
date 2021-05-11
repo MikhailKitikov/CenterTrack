@@ -40,7 +40,8 @@ class nuScenes(GenericDataset):
   id_to_attribute = {v: k for k, v in attribute_to_id.items()}
 
   def __init__(self, opt, split):
-    split_names = {'train': 'train', 'val': 'val'}
+    print("version", opt.dataset_version)
+    split_names = {'train': 'mini', 'val': 'mini'}
     split_name = split_names[split]
     data_dir = os.path.join(opt.data_dir, 'nuscenes')
     img_dir = os.path.join(
@@ -199,23 +200,23 @@ class nuScenes(GenericDataset):
                 open('{}/results_nuscenes_{}.json'.format(save_dir, task), 'w'))
 
 
-  def run_eval(self, results, save_dir):
-    task = 'tracking' if self.opt.tracking else 'det'
-    self.save_results(results, save_dir, task)
-    if task == 'det':
-      os.system('python ' + \
-        'tools/nuscenes-devkit/python-sdk/nuscenes/eval/detection/evaluate.py ' +\
-        '{}/results_nuscenes_{}.json '.format(save_dir, task) + \
-        '--output_dir {}/nuscenes_eval_det_output/ '.format(save_dir) + \
-        '--dataroot ../data/nuscenes/v1.0-trainval/')
-    else:
-      os.system('python ' + \
-        'tools/nuscenes-devkit/python-sdk/nuscenes/eval/tracking/evaluate.py ' +\
-        '{}/results_nuscenes_{}.json '.format(save_dir, task) + \
-        '--output_dir {}/nuscenes_evaltracl__output/ '.format(save_dir) + \
-        '--dataroot ../data/nuscenes/v1.0-trainval/')
-      os.system('python ' + \
-        'tools/nuscenes-devkit/python-sdk-alpha02/nuscenes/eval/tracking/evaluate.py ' +\
-        '{}/results_nuscenes_{}.json '.format(save_dir, task) + \
-        '--output_dir {}/nuscenes_evaltracl__output/ '.format(save_dir) + \
-        '--dataroot ../data/nuscenes/v1.0-trainval/')
+#   def run_eval(self, results, save_dir):
+#     task = 'tracking' if self.opt.tracking else 'det'
+#     self.save_results(results, save_dir, task)
+#     if task == 'det':
+#       os.system('python ' + \
+#         'tools/nuscenes-devkit/python-sdk/nuscenes/eval/detection/evaluate.py ' +\
+#         '{}/results_nuscenes_{}.json '.format(save_dir, task) + \
+#         '--output_dir {}/nuscenes_eval_det_output/ '.format(save_dir) + \
+#         '--dataroot ../data/nuscenes/v1.0-trainval/')
+#     else:
+#       os.system('python ' + \
+#         'tools/nuscenes-devkit/python-sdk/nuscenes/eval/tracking/evaluate.py ' +\
+#         '{}/results_nuscenes_{}.json '.format(save_dir, task) + \
+#         '--output_dir {}/nuscenes_evaltracl__output/ '.format(save_dir) + \
+#         '--dataroot ../data/nuscenes/v1.0-trainval/')
+#       os.system('python ' + \
+#         'tools/nuscenes-devkit/python-sdk-alpha02/nuscenes/eval/tracking/evaluate.py ' +\
+#         '{}/results_nuscenes_{}.json '.format(save_dir, task) + \
+#         '--output_dir {}/nuscenes_evaltracl__output/ '.format(save_dir) + \
+#         '--dataroot ../data/nuscenes/v1.0-trainval/')
